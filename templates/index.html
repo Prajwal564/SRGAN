@@ -5,18 +5,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
-  
-<div class="container">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <!-- <img alt="Brand" src="...">-->
-          SRGAN
-        </a>
-      </div>
-    </div>
-  </nav>
+
+
+  <div class="container">
+<div class="text-center">
+  <h2>
+    Single Image Super Resolution
+  </h2>
+</div>
+
+
+<div class="row">
+
+
+
+
 <div class="row">
     <h2>Select a file to upload</h2>
     <p>
@@ -32,14 +35,21 @@
     </p>
     
     <form method="post" action="/" enctype="multipart/form-data">
+      
         <dl>
             <p>
                 <input type="file" name="file" class="form-control" autocomplete="off" required>
             </p>
         </dl>
-        <p>
-            <input type="submit" value="Submit" class="btn btn-info">
-        </p>
+        <dl>
+        <p>Choose Model:</p>
+          <input type="submit" value="DIV2K" name="DIV2K" class="btn btn-primary"/>
+          <input type="submit" value="CELEB" name="CELEB" class="btn btn-primary"/>
+        </dl>
+        <!-- <p>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </p> -->
+        
     </form>
 </div>
 
@@ -49,7 +59,7 @@
   {% if filename %}
   <div class="col-xs-6 col-md-6">
     <div class="page-header">
-      <h1 class="text-center">Input Image</h1>
+      <h2 class="text-center">Input Image</h2>
     </div>
     <a href="#" class="thumbnail">
       <img src="{{ url_for('display_ip_image', filename=filename) }}" class="img-responsive" height="500px" width="600px">
@@ -60,7 +70,7 @@
 {% if genImg %}
 <div class="col-xs-6 col-md-6">
   <div class="page-header">
-    <h1 class="text-center">Output Image</h1>
+    <h2 class="text-center">Output Image</h2>
   </div>
   <a href="#" class="thumbnail">
     <img src="{{ url_for('display_op_image', filename=genImg) }}" class="img-responsive" height="500px" width="600px">
@@ -69,8 +79,6 @@
 {% endif %}
 </div>
 </div>
-
-
 </div>
 </body>
 </html>

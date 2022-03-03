@@ -24,6 +24,7 @@ def home():
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+
     if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
@@ -36,9 +37,17 @@ def upload_file():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        ip_img_path ='static/uploads/'+filename 
+        ip_img_path ='static/uploads/'+filename
 
-        op_img_path = generate_image(ip_img_path,filename)
+        MODEL_NAME = 'netG_epoch_4_300.pth'
+
+        if request.form.get('DIV2K') == 'DIV2K':
+            MODEL_NAME = 'netG_epoch_4_300.pth'
+        elif  request.form.get('CELEB') == 'CELEB':
+            MODEL_NAME = 'netG_epoch_4_28.pth'
+
+        print('MODEL_NAME >>>>>>', MODEL_NAME)
+        op_img_path = generate_image(ip_img_path,filename,MODEL_NAME)
 
         print('upload_image filename: ','static/uploads/'+filename)
         flash('Image successfully uploaded and displayed below')

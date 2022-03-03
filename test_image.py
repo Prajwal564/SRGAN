@@ -15,12 +15,12 @@ from model import Generator
 # parser.add_argument('--model_name', default='netG_epoch_4_100.pth', type=str, help='generator model epoch name')
 # opt = parser.parse_args()
 
-def generate_image(IMAGE_PATH,filename):
+def generate_image(IMAGE_PATH,filename,MODEL_NAME):
 
     UPSCALE_FACTOR = 4
     TEST_MODE = False 
     IMAGE_NAME = IMAGE_PATH
-    MODEL_NAME = "netG_epoch_4_84.pth"
+    MODEL_NAME = MODEL_NAME
 
     model = Generator(UPSCALE_FACTOR).eval()
     if TEST_MODE:
