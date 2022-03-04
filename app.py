@@ -47,11 +47,11 @@ def upload_file():
             MODEL_NAME = 'netG_epoch_4_28.pth'
 
         print('MODEL_NAME >>>>>>', MODEL_NAME)
-        op_img_path = generate_image(ip_img_path,filename,MODEL_NAME)
+        op_img_path,width_upload,height_upload,width_out,height_out = generate_image(ip_img_path,filename,MODEL_NAME)
 
         print('upload_image filename: ','static/uploads/'+filename)
         flash('Image successfully uploaded and displayed below')
-        return render_template('index.html', filename=filename, genImg=op_img_path)
+        return render_template('index.html', filename=filename, genImg=op_img_path,width_upload = width_upload ,height_upload =height_upload ,width_out = width_out ,height_out = height_out)
     else:
         flash('Allowed image types are - png, jpg, jpeg, gif')
         return redirect(request.url)

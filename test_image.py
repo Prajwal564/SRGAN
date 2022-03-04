@@ -30,6 +30,7 @@ def generate_image(IMAGE_PATH,filename,MODEL_NAME):
         model.load_state_dict(torch.load('epochs/' + MODEL_NAME, map_location=lambda storage, loc: storage))
 
     image = Image.open(IMAGE_NAME)
+    width_upload, height_upload = image.size
     image = Variable(ToTensor()(image), volatile=True).unsqueeze(0)
     if TEST_MODE:
         image = image.cuda()
@@ -39,7 +40,8 @@ def generate_image(IMAGE_PATH,filename,MODEL_NAME):
     # elapsed = (time.clock() - start)
     # print('cost' + str(elapsed) + 's')
     out_img = ToPILImage()(out[0].data.cpu())
+    width_out, height_out = out_img.size
     out_img.save('static/downloads/'+ 'out_srf_1'+ str(UPSCALE_FACTOR) + '_' + filename)
     out_img_path = 'out_srf_1'+ str(UPSCALE_FACTOR) + '_' + filename
-
-    return out_img_path
+    print('image resolutions  >>>>> ',width_upload,height_upload,width_out,height_out)
+    return out_img_path,width_upload,height_upload,width_out,height_out
